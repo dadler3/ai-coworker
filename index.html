@@ -91,23 +91,18 @@ button:hover {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-button:active {
-    transform: translateY(0);
-}
-
 .result {
     margin-top: 24px;
-    min-height: 120px;
+    min-height: 140px;
 }
 
 .quote-card {
-    background: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.95);
     color: #111827;
     border-radius: 20px;
     padding: 28px;
     text-align: left;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    animation: fadeIn 0.4s ease;
 }
 
 .quote-label {
@@ -120,25 +115,14 @@ button:active {
 }
 
 .quote-text {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     line-height: 1.7;
 }
 
 .footer {
-    margin-top: 28px;
-    color: rgba(255,255,255,0.7);
+    margin-top: 30px;
+    color: rgba(255,255,255,0.75);
     font-size: 13px;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 @media (max-width: 640px) {
@@ -158,7 +142,7 @@ button:active {
     }
 
     .quote-text {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
     }
 }
 </style>
@@ -179,8 +163,8 @@ button:active {
             <input
                 id="name"
                 type="text"
-                placeholder="Enter your name"
-                onkeydown="if(event.key==='Enter') generate()">
+                placeholder="Your Name"
+                onkeypress="if(event.key==='Enter') generate();">
             <button onclick="generate()">Generate</button>
         </div>
 
@@ -197,4 +181,73 @@ button:active {
 
 const compliments = [
     "Working with {name} has been one of the absolute highlights of my time here. Their positivity, professionalism, and ability to make things happen are unmatched.",
-    "{name} consistently brought thoughtfulness, collaboration, and great energy to every interaction. Any team is lucky
+    "{name} consistently brought thoughtfulness, collaboration, and great energy to every interaction. Any team is lucky to have them.",
+    "I've always appreciated {name}'s willingness to help, solve problems, and somehow keep things moving forward even when things got chaotic.",
+    "{name} has the rare combination of intelligence, kindness, and common sense. It has been a pleasure working together.",
+    "Whether tackling big projects or everyday challenges, {name} always made work more enjoyable and successful.",
+    "One thing I'll always remember about {name} is their ability to make everyone around them better.",
+    "{name} is a true team player whose impact extends far beyond what most people realize.",
+    "If there were a Hall of Fame for coworkers, {name} would receive strong consideration from the committee.",
+    "{name} has a unique ability to make complex situations feel manageable and challenging situations feel a little less challenging.",
+    "Working with {name} always meant getting thoughtful perspectives, practical solutions, and occasional comic relief exactly when it was needed.",
+    "{name} consistently raised the level of every discussion, meeting, and project they were involved in.",
+    "I've always appreciated {name}'s willingness to jump in, help out, and make things better than they found them.",
+    "{name} brought a combination of reliability, good judgment, and teamwork that everyone valued.",
+    "Every organization needs people like {name}: smart, collaborative, and willing to do whatever needs to be done.",
+    "One of the things I'll remember most about {name} is their steady presence and positive influence on those around them.",
+    "{name} somehow found a way to improve outcomes while also making the process more enjoyable for everyone involved.",
+    "Whether leading, supporting, or troubleshooting, {name} always seemed to make the team stronger.",
+    "{name} has a knack for asking the right questions and helping people find the right answers.",
+    "Working alongside {name} was a reminder that professionalism and kindness are not mutually exclusive.",
+    "{name} consistently brought energy, perspective, and a willingness to tackle whatever came next.",
+    "It's difficult to quantify the impact {name} has had, but it's safe to say it has been significant.",
+    "Any project that included {name} was immediately more likely to succeed and considerably more pleasant to work on.",
+    "{name} has earned the respect of colleagues through competence, integrity, and an uncanny ability to stay calm under pressure.",
+    "Some coworkers contribute to projects. {name} contributed to people, teams, and culture as well.",
+    "I always knew that if {name} was involved, things would end up in a better place than where they started.",
+    "{name} made a lasting impact through a combination of expertise, generosity, and genuine care for others.",
+    "Organizations spend years searching for teammates like {name}. Fortunately, we already had one.",
+    "Working with {name} has been a genuine privilege and one of the many experiences I'll look back on fondly.",
+    "{name} has been selected for Platinum Coworker status. This designation has absolutely no benefits but sounds impressive.",
+    "After extensive analysis, our model has determined that {name} is above replacement coworker.",
+    "{name} received a coworker WAR rating that rounds favorably and therefore will not be discussed further.",
+    "The algorithm rated {name} as 'Strongly Recommended for Future Team Projects.'",
+    "The data indicates that meetings were, on average, 14% better when {name} attended. Methodology unavailable upon request."
+];
+
+let lastIndex = -1;
+
+function generate() {
+
+    const name = document.getElementById("name").value.trim();
+
+    if (name === "") {
+        document.getElementById("result").innerHTML =
+            '<div class="quote-card">' +
+            '<div class="quote-text">Please enter your name.</div>' +
+            '</div>';
+        return;
+    }
+
+    let randomIndex;
+
+    do {
+        randomIndex = Math.floor(Math.random() * compliments.length);
+    } while (compliments.length > 1 && randomIndex === lastIndex);
+
+    lastIndex = randomIndex;
+
+    const message =
+        compliments[randomIndex].replace("{name}", name);
+
+    document.getElementById("result").innerHTML =
+        '<div class="quote-card">' +
+        '<div class="quote-label">Official Farewell Message</div>' +
+        '<div class="quote-text">' + message + '</div>' +
+        '</div>';
+}
+
+</script>
+
+</body>
+</html>
