@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daniel's Colleague Appreciation Engine™</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 60px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        input {
+            font-size: 18px;
+            padding: 10px;
+            width: 300px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 22px;
+            line-height: 1.5;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Daniel's Colleague Appreciation Engine™</h1>
+    <p>Enter your name to discover what Daniel was definitely going to say about you in his farewell email.</p>
+
+    <input id="name" placeholder="Your Name">
+    <button onclick="generate()">Generate</button>
+
+    <div id="result"></div>
+
+    <script>
+        const compliments = [
+            "Working with {name} has been one of the absolute highlights of my time here. Their positivity, professionalism, and ability to make things happen are unmatched.",
+            "{name} consistently brought thoughtfulness, collaboration, and great energy to every interaction. Any team is lucky to have them.",
+            "I've always appreciated {name}'s willingness to help, solve problems, and somehow keep things moving forward even when things got chaotic.",
+            "{name} has the rare combination of intelligence, kindness, and common sense. It has been a pleasure working together.",
+            "Whether tackling big projects or everyday challenges, {name} always made work more enjoyable and successful.",
+            "One thing I'll always remember about {name} is their ability to make everyone around them better.",
+            "{name} is a true team player whose impact extends far beyond what most people realize.",
+            "If there were a Hall of Fame for coworkers, {name} would receive strong consideration from the committee."
+        ];
+
+        function generate() {
+            const name = document.getElementById("name").value.trim();
+
+            if (!name) {
+                document.getElementById("result").innerHTML =
+                    "Please enter your name.";
+                return;
+            }
+
+            const index = name.length % compliments.length;
+
+            document.getElementById("result").innerHTML =
+                compliments[index].replace("{name}", name);
+        }
+    </script>
+
+</body>
+</html>
